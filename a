@@ -1,0 +1,1164 @@
+[1mdiff --git a/TestGame1.java b/TestGame1.java[m
+[1mdeleted file mode 100644[m
+[1mindex 3d8bcbd..0000000[m
+[1m--- a/TestGame1.java[m
+[1m+++ /dev/null[m
+[36m@@ -1,90 +0,0 @@[m
+[31m-import java.io.BufferedReader;[m
+[31m-import java.io.IOError;[m
+[31m-import java.io.IOException;[m
+[31m-import java.io.InputStreamReader;[m
+[31m-[m
+[31m-public class TestGame1 {[m
+[31m-    public static void main(String[] args) {[m
+[31m-        int numOfGuesses = 0;[m
+[31m-        [m
+[31m-        GameHelper helper = new GameHelper();[m
+[31m-        SimpleDotCom theDotCom = new SimpleDotCom();[m
+[31m-        int randomNum = (int) (Math.random() * 5);[m
+[31m-[m
+[31m-        int[] location = {randomNum, randomNum + 1, randomNum + 2};[m
+[31m-        theDotCom.setLocationCells(location);[m
+[31m-        boolean isAlive = true;[m
+[31m-[m
+[31m-        while (isAlive == true) {[m
+[31m-            String guess = helper.getUserInput("enter a number");[m
+[31m-            String result = theDotCom.checkYourself(guess);[m
+[31m-            numOfGuesses++;[m
+[31m-            if (result.equals("kill")) {[m
+[31m-                isAlive = false;[m
+[31m-                System.out.println("You took " + numOfGuesses + "guesses");[m
+[31m-            }[m
+[31m-        }[m
+[31m-    }[m
+[31m-[m
+[31m-    public class SimpleDotCom {[m
+[31m-        int[] locationCells;[m
+[31m-        int numOfHits = 0;[m
+[31m-[m
+[31m-        public void setLocationCells(int[] locs) {[m
+[31m-            locationCells = locs;[m
+[31m-        }[m
+[31m-[m
+[31m-        public String checkYourself(String stringGuess) {[m
+[31m-            int guess = Integer.parseInt(stringGuess);[m
+[31m-            String result = "miss";[m
+[31m-[m
+[31m-            for (int cell : locationCells) {[m
+[31m-                if (guess == cell) {[m
+[31m-                    result = "hit";[m
+[31m-                    numOfHits++;[m
+[31m-                    break;[m
+[31m-                }[m
+[31m-            }[m
+[31m-            if (numOfHits == locationCells.length) {[m
+[31m-                result = "kill";[m
+[31m-            }[m
+[31m-            System.out.println(result);[m
+[31m-            return result;[m
+[31m-        }[m
+[31m-    }[m
+[31m-[m
+[31m-[m
+[31m-   /*  public class SimpleDotComTestDrive{[m
+[31m-        public void main(String[] args) {[m
+[31m-            SimpleDotCom dot = new SimpleDotCom();[m
+[31m-[m
+[31m-            int[] locations = {2, 3, 4};[m
+[31m-            dot.setLocationCells(locations);[m
+[31m-[m
+[31m-[m
+[31m-            String userGuess = "2";[m
+[31m-            String result = dot.checkYourself(userGuess);[m
+[31m-            String testResult = "failed";[m
+[31m-            if (result.equals("hit")) {[m
+[31m-                testResult = "passed";[m
+[31m-            }[m
+[31m-            System.out.println(testResult);[m
+[31m-[m
+[31m-        }[m
+[31m-    }*/[m
+[31m-    [m
+[31m-    public class GameHelper{[m
+[31m-        public String getUserInput(String prompt){[m
+[31m-        String inputLine = null;[m
+[31m-        System.out.print(prompt + " ");[m
+[31m-        try {[m
+[31m-            BufferedReader is = new BufferedReader(new InputStreamReader(System.in));[m
+[31m-            inputLine = is.readLine();[m
+[31m-            if (inputLine.length() == 0) return null;[m
+[31m-            } catch (IOException e){[m
+[31m-            System.out.println("IOException: " + e);[m
+[31m-             }[m
+[31m-            return inputLine;[m
+[31m-      }[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/lesson-1/XuZongdi/MySort.cpp b/lesson-1/XuZongdi/MySort.cpp[m
+[1mdeleted file mode 100644[m
+[1mindex 9c26ace..0000000[m
+[1m--- a/lesson-1/XuZongdi/MySort.cpp[m
+[1m+++ /dev/null[m
+[36m@@ -1,61 +0,0 @@[m
+[31m-﻿#include <algorithm>[m
+[31m-#include <cstring>[m
+[31m-#include <iostream>[m
+[31m-#include <vector>[m
+[31m-#define CLEAR(a) memset((a),0,sizeof((a)))[m
+[31m-[m
+[31m-using namespace std;[m
+[31m-[m
+[31m-const int maxn = 1e5;[m
+[31m-vector<int> a[maxn];[m
+[31m-int n;[m
+[31m-[m
+[31m-void init();[m
+[31m-void solve();[m
+[31m-void outp();[m
+[31m-[m
+[31m-int main()[m
+[31m-{[m
+[31m-    while (cin >> n)[m
+[31m-    {[m
+[31m-        init();[m
+[31m-        solve();[m
+[31m-        outp();[m
+[31m-    }[m
+[31m-    return 0;[m
+[31m-}[m
+[31m-[m
+[31m-void init()[m
+[31m-{[m
+[31m-    for (int i = 0; i < maxn; i++)[m
+[31m-    {[m
+[31m-        a[i].clear();[m
+[31m-    }[m
+[31m-    for (int i = 1; i <= n; i++)[m
+[31m-    {[m
+[31m-        int k;[m
+[31m-        cin >> k;[m
+[31m-        a[k / 10].push_back(k);[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-void solve()[m
+[31m-{[m
+[31m-    for (int i = 0; i < maxn; i++)[m
+[31m-    {[m
+[31m-        sort(&a[i][0], &a[i][0] + a[i].size());[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-void outp()[m
+[31m-{[m
+[31m-    for (int i = 0; i < maxn; i++)[m
+[31m-    {[m
+[31m-        for (int j = 0; j < a[i].size(); j++)[m
+[31m-        {[m
+[31m-            cout << a[i][j] << ' ';[m
+[31m-        }[m
+[31m-    }[m
+[31m-    cout << endl;[m
+[31m-}[m
+[31m-[m
+[1mdiff --git a/lesson-1/XuZongdi/README.md b/lesson-1/XuZongdi/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex b89b257..0000000[m
+[1m--- a/lesson-1/XuZongdi/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,28 +0,0 @@[m
+[31m-﻿#Dean / HTS[m
+[31m-[m
+[31m-******************[m
+[31m-[m
+[31m-##I CleanCode[m
+[31m-* MySort.cpp    [m
+[31m-* Read n integers from the keyboard and sort them in a certain way that I developed.[m
+[31m-  [m
+[31m-[m
+[31m-##II Google[m
+[31m-*搜狗截图20141104152553.png[m
+[31m-*             .                                              [m
+[31m-*          ~+<+=+'                          .<(-             [m
+[31m-*        .s~    ~z(                         .(s.             [m
+[31m-*        z-      ~                          .(s.             [m
+[31m-*      .<=  .          ....    .....    ... .(s.             [m
+[31m-*      .s(.          .(~<+'....-'~-... <(ss+.~s.  ((+(.      [m
+[31m-*      's~.         .=. .-z'.'~.  ~. (s. .z~.~s  =...s(      [m
+[31m-*     ..z<.         (+.  .==.('.  .(-(z ..<s.~s ~<.'((.      [m
+[31m-*      .ss.    ~+=s.++.  .(z'('.  .(-(z. .~s.~z <=(-         [m
+[31m-*      .<z~.    .=+ +=.  .~z'(-.  .(-(==..=..~z (s'.         [m
+[31m-*        sz'    .=+ -z-. .<+.((.  .'  ~+z..  z..z<..        [m
+[31m-*        .+z<' ..s= .<z'.-=...(~..~-..  'z<. <z' (z+-~~     [m
+[31m-*          .(<+<('   .'((-   ..'--.    <((z=. ~          [m
+[31m-*                                    +<....z-        [m
+[31m-*                                   .z..   <~             [m
+[31m-*                                    z<    s.              [m
+[31m-*                                    'sz=++.                 [m
+\ No newline at end of file[m
+[1mdiff --git "a/lesson-1/XuZongdi/\346\220\234\347\213\227\346\210\252\345\233\27620141104152553.png" "b/lesson-1/XuZongdi/\346\220\234\347\213\227\346\210\252\345\233\27620141104152553.png"[m
+[1mdeleted file mode 100644[m
+[1mindex 39e57a6..0000000[m
+Binary files "a/lesson-1/XuZongdi/\346\220\234\347\213\227\346\210\252\345\233\27620141104152553.png" and /dev/null differ
+[1mdiff --git a/lesson-1/chengshengyang/README.md b/lesson-1/chengshengyang/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex 7ed8aa9..0000000[m
+[1m--- a/lesson-1/chengshengyang/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,22 +0,0 @@[m
+[31m-# ChengShengyang's task   [m
+[31m-[m
+[31m-## List   [m
+[31m-[m
+[31m-README.md   [m
+[31m-mergesort.c   [m
+[31m-google.JPG   [m
+[31m-[m
+[31m-## mergesort.c[m
+[31m-[m
+[31m-The progrme is used to sort integers.   [m
+[31m-[m
+[31m-example:   [m
+[31m-    [m
+[31m-    Enter how many numbers you want to sort:8[m
+[31m-    Enter the numbers:[m
+[31m-    -45 4 89734 -234 0 2 456 84[m
+[31m-[m
+[31m-    Before sorting[m
+[31m-    -45 4 89734 -234 0 2 456 84[m
+[31m-    After sorting[m
+[31m-    -234 -45 0 2 4 84 456 89734 [m
+[1mdiff --git a/lesson-1/chengshengyang/google.JPG b/lesson-1/chengshengyang/google.JPG[m
+[1mdeleted file mode 100644[m
+[1mindex eae1636..0000000[m
+Binary files a/lesson-1/chengshengyang/google.JPG and /dev/null differ
+[1mdiff --git a/lesson-1/chengshengyang/mergesort.c b/lesson-1/chengshengyang/mergesort.c[m
+[1mdeleted file mode 100644[m
+[1mindex 3cef3bf..0000000[m
+[1m--- a/lesson-1/chengshengyang/mergesort.c[m
+[1m+++ /dev/null[m
+[36m@@ -1,87 +0,0 @@[m
+[31m-//Mergesort.c[m
+[31m-#include <stdio.h>[m
+[31m-#include <stdlib.h>[m
+[31m-[m
+[31m-void inputData(void);[m
+[31m-void outputData(void);[m
+[31m-void mergeSort(int left, int right);[m
+[31m-void merge(int left, int right);[m
+[31m-[m
+[31m-int size;[m
+[31m-int * dataArray;[m
+[31m-[m
+[31m-int main(void)[m
+[31m-{[m
+[31m-    inputData();[m
+[31m-    mergeSort(0, size - 1);[m
+[31m-    outputData();[m
+[31m-[m
+[31m-    free(dataArray);[m
+[31m-    return 0;[m
+[31m-}[m
+[31m-[m
+[31m-[m
+[31m-void inputData(void)[m
+[31m-{[m
+[31m-    int i;[m
+[31m-[m
+[31m-    printf("Enter how many numbers you want to sort:");[m
+[31m-    scanf("%d", &size);[m
+[31m-    dataArray = (int *)malloc(size * sizeof(int));[m
+[31m-[m
+[31m-    printf("Enter the numbers:\n");[m
+[31m-    for (i = 0; i < size; i++ )[m
+[31m-        scanf("%d", &dataArray[i]);[m
+[31m-    printf("\nBefore sorting\n");[m
+[31m-    for (i = 0; i < size; i++)[m
+[31m-        printf("%d ", dataArray[i]);[m
+[31m-}[m
+[31m-[m
+[31m-void outputData(void)[m
+[31m-{[m
+[31m-    int i;[m
+[31m-[m
+[31m-    printf("\nAfter sorting\n");[m
+[31m-    for (i = 0; i < size; i++)[m
+[31m-        printf("%d ", dataArray[i]);[m
+[31m-}[m
+[31m-[m
+[31m-void mergeSort(int left, int right)[m
+[31m-{[m
+[31m-    int mid = (left + right) / 2;[m
+[31m-[m
+[31m-    if (left < right)[m
+[31m-    {[m
+[31m-        mergeSort(left, mid);[m
+[31m-        mergeSort(mid + 1, right);[m
+[31m-        merge(left, right);[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-[m
+[31m-void merge(int left, int right)[m
+[31m-{[m
+[31m-    int i ,j, k;[m
+[31m-    int mid = (left + right) / 2;[m
+[31m-    int * tempArray;[m
+[31m-    tempArray = (int *)malloc(size * sizeof(int));[m
+[31m-[m
+[31m-    for (i = left; i <= mid; i++)[m
+[31m-        tempArray[i] = dataArray[i];[m
+[31m-    for (i = mid + 1, j = right; i <= right; i++, j--)[m
+[31m-        tempArray[i] = dataArray[j];[m
+[31m-    //copy data into "2" temp arrays[m
+[31m-    //actually they are stored in only one array[m
+[31m-[m
+[31m-    i = left;[m
+[31m-    j = right;[m
+[31m-    for (k = left; k <= right; k++)[m
+[31m-        if (tempArray[i] <= tempArray[j])[m
+[31m-            dataArray[k] = tempArray[i++];[m
+[31m-        else[m
+[31m-            dataArray[k] = tempArray[j--];[m
+[31m-    //insert the temp arrays into data array[m
+[31m-[m
+[31m-    free(tempArray);[m
+[31m-}[m
+[31m-[m
+[1mdiff --git a/lesson-1/disoul/README.md b/lesson-1/disoul/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex 71b2054..0000000[m
+[1m--- a/lesson-1/disoul/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-#DISOUL的作业咩[m
+[31m-[m
+[31m-******************[m
+[31m-[m
+[31m-##I 规范代码[m
+[31m-* SweepMain.cpp    [m
+[31m-* 制作安卓扫雷的主要场景cpp[m
+[31m-* 还在制作中咩[m
+[31m-  [m
+[31m-[m
+[31m-##II Google[m
+[31m-[m
+[31m-* 熊大萌萌哒[m
+\ No newline at end of file[m
+[1mdiff --git a/lesson-1/disoul/SweepMain.cpp b/lesson-1/disoul/SweepMain.cpp[m
+[1mdeleted file mode 100644[m
+[1mindex 092737d..0000000[m
+[1m--- a/lesson-1/disoul/SweepMain.cpp[m
+[1m+++ /dev/null[m
+[36m@@ -1,201 +0,0 @@[m
+[31m-﻿#include "cocos2d.h"[m
+[31m-#include "SweepMain.h"[m
+[31m-#include "time.h"[m
+[31m-#include "string.h"[m
+[31m-#include "ctime"[m
+[31m-[m
+[31m-USING_NS_CC;[m
+[31m-[m
+[31m-Sweep sweep[9][9];[m
+[31m-int markNumber = 0,clickNumber = 0;[m
+[31m-[m
+[31m-bool SweepMain::init()[m
+[31m-{[m
+[31m-	  if ( !Layer::init() )[m
+[31m-     {[m
+[31m-			return false;[m
+[31m-     }[m
+[31m-	  sweepSurplusTTF = CCLabelTTF::create();//剩余雷数显示[m
+[31m-[m
+[31m-	  creatSweepMap(); //数字信息生成[m
+[31m-	  creatSweepSprite(); //图像信息生成[m
+[31m-	  this->setTouchEnabled(true);[m
+[31m-	  sweepTouchCreate();//生成按钮[m
+[31m-	  schedule(schedule_selector(SweepMain::sweepUpdate), 0.017f);//UPDATE[m
+[31m-[m
+[31m-}[m
+[31m-[m
+[31m-void SweepMain::sweepUpdate(float t)[m
+[31m-{[m
+[31m-	if ((clickNumber == 72)||(markNumber == 9))	toGameOver();	[m
+[31m-}[m
+[31m-[m
+[31m-void SweepMain::creatSweepMap()[m
+[31m-{[m
+[31m-	int numSweep = 0;[m
+[31m-	for (int i=0;i<9;i++)[m
+[31m-		for (int j=0;j<9;j++)[m
+[31m-		{[m
+[31m-			sweep[i][j].sweepNumber = 0;[m
+[31m-			sweep[i][j].Xpoint = i;[m
+[31m-			sweep[i][j].Ypoint = j;[m
+[31m-			sweep[i][j].isClick = false;[m
+[31m-		}[m
+[31m-[m
+[31m-	std::srand(time(NULL));[m
+[31m-	while (numSweep != 10)[m
+[31m-	{[m
+[31m-		int xPoint = rand()%9;[m
+[31m-		int yPoint = rand()%9;[m
+[31m-		if (sweep[xPoint][yPoint].sweepNumber == 0)[m
+[31m-		{[m
+[31m-			sweep[xPoint][yPoint].sweepNumber = 10;[m
+[31m-			numSweep++;[m
+[31m-		}[m
+[31m-	}[m
+[31m-[m
+[31m-	for (int i=0;i<9;i++)[m
+[31m-		for (int j=0;j<9;j++)[m
+[31m-			getSweepNumber(i,j);[m
+[31m-}[m
+[31m-[m
+[31m-void SweepMain::creatSweepSprite()[m
+[31m-{[m
+[31m-	std::string clickNumber;[m
+[31m-	for (int i=0;i<9;i++)[m
+[31m-		for (int j=0;j<9;j++)[m
+[31m-		{[m
+[31m-			sweep[i][j].sweepButton = CCSprite::create("sweep.png");[m
+[31m-			sweep[i][j].sweepButton->setPosition(ccp(29+i*20,220-(j*20)));[m
+[31m-			this->addChild(sweep[i][j].sweepButton);[m
+[31m-		}[m
+[31m-}[m
+[31m-[m
+[31m-void SweepMain::getSweepNumber(int x,int y)[m
+[31m-{[m
+[31m-	if ((sweep[x-1][y-1].sweepNumber == 10)&&(x-1>=0)&&(y-1>=0)) sweep[x][y].sweepNumber++;[m
+[31m-	if ((sweep[x-1][y+1].sweepNumber == 10)&&(x-1>=0)&&(y+1<=8)) sweep[x][y].sweepNumber++;[m
+[31m-	if ((sweep[x+1][y-1].sweepNumber == 10)&&(x+1<=8)&&(y-1>=0)) sweep[x][y].sweepNumber++;[m
+[31m-	if ((sweep[x+1][y+1].sweepNumber == 10)&&(x+1<=8)&&(y+8<=8)) sweep[x][y].sweepNumber++;[m
+[31m-	if ((sweep[x][y-1].sweepNumber == 10)&&(y-1>=0)) sweep[x][y].sweepNumber++;[m
+[31m-	if ((sweep[x-1][y].sweepNumber == 10)&&(x-1>=0)) sweep[x][y].sweepNumber++;[m
+[31m-	if ((sweep[x][y+1].sweepNumber == 10)&&(y+1<=8)) sweep[x][y].sweepNumber++;[m
+[31m-	if ((sweep[x+1][y].sweepNumber == 10)&&(x+1<=8)) sweep[x][y].sweepNumber++;[m
+[31m-}[m
+[31m-[m
+[31m-void SweepMain::sweepTouchCreate()[m
+[31m-{[m
+[31m-	Listener = EventListenerTouchOneByOne::create();   [m
+[31m-	Listener->setSwallowTouches(true);[m
+[31m-[m
+[31m-	[m
+[31m-	Listener->onTouchBegan = [](Touch* touch, Event* event)[m
+[31m-	{[m
+[31m-[m
+[31m-		 CCPoint touchPoint = touch->getLocationInView();     [m
+[31m-		 touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint );  [m
+[31m-		 for (int i=0;i<9;i++)[m
+[31m-			 for (int j=0;j<9;j++)[m
+[31m-			 {[m
+[31m-					CCRect rc1 = sweep[i][j].sweepButton->boundingBox(); [m
+[31m-[m
+[31m-					if(rc1.containsPoint(touchPoint))[m
+[31m-					{[m
+[31m-						sweep[i][j].sweepButton->setTexture("sweep0.png");[m
+[31m-					}[m
+[31m-			 }[m
+[31m-         return true;[m
+[31m-	};[m
+[31m-[m
+[31m-	Listener->onTouchMoved = [](Touch* touch, Event* event)[m
+[31m-	{[m
+[31m-[m
+[31m-		 CCPoint touchPoint = touch->getLocationInView();     [m
+[31m-		 touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint );  [m
+[31m-		 for (int i=0;i<9;i++)[m
+[31m-			 for (int j=0;j<9;j++)[m
+[31m-			 {[m
+[31m-					CCRect rc1 = sweep[i][j].sweepButton->boundingBox(); [m
+[31m-[m
+[31m-					if(rc1.containsPoint(touchPoint))[m
+[31m-					{[m
+[31m-						sweep[i][j].sweepButton->setTexture("sweep0.png");[m
+[31m-						clock_t touchTime = clock();[m
+[31m-						while (clock()-touchTime < CLOCKS_PER_SEC*2){};[m
+[31m-						sweep[i][j].markSweepButton();[m
+[31m-					}[m
+[31m-			 }[m
+[31m-[m
+[31m-        [m
+[31m-	};[m
+[31m-    Listener->onTouchEnded = [=](Touch* touch, Event* event)[m
+[31m-	{[m
+[31m-		 CCPoint touchPoint = touch->getLocationInView();     [m
+[31m-		 touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint );  [m
+[31m-		 for (int i=0;i<9;i++)[m
+[31m-			 for (int j=0;j<9;j++)[m
+[31m-			 {[m
+[31m-					CCRect rc1 = sweep[i][j].sweepButton->boundingBox(); [m
+[31m-[m
+[31m-					if(rc1.containsPoint(touchPoint))[m
+[31m-					{[m
+[31m-						sweep[i][j].clickSweepButton();	[m
+[31m-					}[m
+[31m-			 }[m
+[31m-        [m
+[31m-	};[m
+[31m-	_eventDispatcher->addEventListenerWithSceneGraphPriority(Listener, sweep[0][0].sweepButton);[m
+[31m-}[m
+[31m-[m
+[31m-void Sweep::clickSweepButton()[m
+[31m-{[m
+[31m-	if (!this->isClick)[m
+[31m-	{[m
+[31m-		std::string spriteName;[m
+[31m-		spriteName = "sweep"+(char)(sweep[this->Xpoint][this->Ypoint].sweepButton+48);[m
+[31m-		spriteName = spriteName+".png";[m
+[31m-		sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture(spriteName);[m
+[31m-		[m
+[31m-		if (this->sweepNumber == 10) toGameOver();[m
+[31m-[m
+[31m-		if (this->sweepNumber == 0)[m
+[31m-		{[m
+[31m-			sweep[this->Xpoint + 1][this->Ypoint + 1].clickSweepButton();[m
+[31m-			sweep[this->Xpoint - 1][this->Ypoint + 1].clickSweepButton();[m
+[31m-			sweep[this->Xpoint + 1][this->Ypoint - 1].clickSweepButton();[m
+[31m-			sweep[this->Xpoint - 1][this->Ypoint - 1].clickSweepButton();[m
+[31m-			sweep[this->Xpoint + 1][this->Ypoint].clickSweepButton();[m
+[31m-			sweep[this->Xpoint - 1][this->Ypoint].clickSweepButton();[m
+[31m-			sweep[this->Xpoint][this->Ypoint + 1].clickSweepButton();[m
+[31m-			sweep[this->Xpoint][this->Ypoint - 1].clickSweepButton();   //递归[m
+[31m-		}[m
+[31m-		this->isClick = true;[m
+[31m-		clickNumber++;[m
+[31m-	}[m
+[31m-}[m
+[31m-[m
+[31m-void Sweep::markSweepButton()[m
+[31m-{[m
+[31m-	if (!this->isClick)[m
+[31m-	{[m
+[31m-		this->isClick = true;[m
+[31m-		markNumber++;[m
+[31m-		sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep_mark.png");[m
+[31m-		if (sweep[this->Xpoint][this->Ypoint].sweepNumber != 10) toGameOver();[m
+[31m-	}[m
+[31m-}[m
+[31m-[m
+[31m-void SweepMain::toGameOver()[m
+[31m-{[m
+[31m-[m
+[31m-}[m
+[31m-[m
+[31m-[m
+[31m-CCScene* SweepMain::gameScene()[m
+[31m-{[m
+[31m-	CCScene* playScene = CCScene::create();[m
+[31m-	SweepMain* layer = SweepMain::create();[m
+[31m-[m
+[31m-	playScene->addChild(layer);[m
+[31m-	return playScene;[m
+[31m-}[m
+[1mdiff --git a/lesson-1/disoul/google.png b/lesson-1/disoul/google.png[m
+[1mdeleted file mode 100644[m
+[1mindex dd2ee7c..0000000[m
+Binary files a/lesson-1/disoul/google.png and /dev/null differ
+[1mdiff --git a/lesson-1/huangtings-task/GoogleSearch.png b/lesson-1/huangtings-task/GoogleSearch.png[m
+[1mdeleted file mode 100644[m
+[1mindex c6b02f9..0000000[m
+Binary files a/lesson-1/huangtings-task/GoogleSearch.png and /dev/null differ
+[1mdiff --git a/lesson-1/huangtings-task/README.md b/lesson-1/huangtings-task/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex f88a2d5..0000000[m
+[1m--- a/lesson-1/huangtings-task/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,6 +0,0 @@[m
+[31m-#lesson task[m
+[31m-- GoogleSearch[m
+[31m-[m
+[31m-- lesson-task.py:[m
+[31m-[m
+[31m-  my first code of class[m
+[1mdiff --git a/lesson-1/huangtings-task/lesson-task.py b/lesson-1/huangtings-task/lesson-task.py[m
+[1mdeleted file mode 100644[m
+[1mindex 2af268d..0000000[m
+[1m--- a/lesson-1/huangtings-task/lesson-task.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,95 +0,0 @@[m
+[31m-import sys[m
+[31m-[m
+[31m-class eatNuts:[m
+[31m-    """This class retain one kind of nuts which can be removed to eat[m
+[31m-    in an individually way,and will raise an error[m
+[31m-    if you didn't choose the right nuts.[m
+[31m-    """[m
+[31m-[m
+[31m-    def __init__(self, items{}):[m
+[31m-        """[m
+[31m-        through the initial dictionary of items[m
+[31m-        """[m
+[31m-        if type(items) != dict:[m
+[31m-                raise TypeError("Nuts requires a dictionary but was given %s" %(type(items)))[m
+[31m-        self.items = items[m
+[31m-        return[m
+[31m-[m
+[31m-    def has(self, nuts_name, quantity = 1):[m
+[31m-        """[m
+[31m-        has(nuts_name, quantity) - checks if the string nuts_name is existence.[m
+[31m-        Quantity defaults to 1. Returns True if nuts_name exists, Faulse otherwise.[m
+[31m-        """[m
+[31m-        return self.has_various({nuts_name:quantity})[m
+[31m-[m
+[31m-    def has_various(self, nuts):[m
+[31m-        """[m
+[31m-        has_various(nuts) determines if the dictionary nuts_name has enough to offer.[m
+[31m-        returns True if there's enough, False if there's not or if an element does not exist.[m
+[31m-        """[m
+[31m-        try:[m
+[31m-            for keys in nuts.keys():[m
+[31m-                if self.items[keys] < nuts[keys]:[m
+[31m-                    return False[m
+[31m-            return True[m
+[31m-        except KeyError:[m
+[31m-            return False[m
+[31m-[m
+[31m-[m
+[31m-    def __get_multi(self, nuts_name, quantity):[m
+[31m-        """[m
+[31m-        __get_multi(nuts_name, quantity) - removes more than one of a nuts item.[m
+[31m-        Returns the number of items removed, returns False if there isn't enough nuts_name in the fidge. This should only be used internally, after the type cheking has been done[m
+[31m-        """[m
+[31m-        try:[m
+[31m-            if (self.items[nuts_name] is None):[m
+[31m-                return False;[m
+[31m-            if (quantity > self.items[nuts_name]):[m
+[31m-                return False;[m
+[31m-            self.items[nuts_name] = self.items[nuts_name] - quantity[m
+[31m-        except KeyError:[m
+[31m-            return False[m
+[31m-        return quantity[m
+[31m-[m
+[31m-    def get_one(self, nuts_name):[m
+[31m-        """[m
+[31m-        get_one(nuts_name) - get one nut to eat:[m
+[31m-        1 as a result, or False if there wasn't enough.[m
+[31m-        """[m
+[31m-        if type(nuts_name) != type(""):[m
+[31m-            raise TypeError("get_one requirs a string, given a %s" %(type(food_name)))[m
+[31m-        else:[m
+[31m-            result = self.__get_multi(nuts_name, 1)[m
+[31m-        return result[m
+[31m-    [m
+[31m-    def get_many(self, nuts_dict):[m
+[31m-        """[m
+[31m-        get_mant(nuts_dict) - takes out a whole dictionary worth of food.[m
+[31m-        returns a dictonary with all of the nuts.[m
+[31m-        Return False if there are not enough nuts or if a dictionary isn't provided.[m
+[31m-        """[m
+[31m-        if self.has_various(nuts_dict):[m
+[31m-            nuts_removed = {}[m
+[31m-            for item in nuts_dict.keys():[m
+[31m-                nuts_removed[item] = self.__get_multi(item, nuts_dict[item])[m
+[31m-        return nuts_removed[item][m
+[31m-[m
+[31m-    def eatOneNut(self, nuts_name):[m
+[31m-        num = self.get_one(nuts_name)[m
+[31m-        while(num > 0):[m
+[31m-            print("There is only one %s I have to eat it now:)" %(nuts_name))[m
+[31m-            num = num - 1[m
+[31m-        else:[m
+[31m-            print("There is no more nuts, focus on your work!")[m
+[31m-[m
+[31m-    def eatSomeNuts(self, nuts_dict):[m
+[31m-        num = self.get_many(nuts_dict)[m
+[31m-        while(num > 0):[m
+[31m-            print("I'm hungry, let me eat some nuts")[m
+[31m-            value = value - 1[m
+[31m-        else:[m
+[31m-            print("You have ate all nuts, don't forget your plan!")[m
+[31m-        [m
+[31m-[m
+[31m-    [m
+[31m-    [m
+[1mdiff --git a/lesson-1/nihongtao/Birthday processing.c b/lesson-1/nihongtao/Birthday processing.c[m
+[1mdeleted file mode 100644[m
+[1mindex 4fedf47..0000000[m
+[1m--- a/lesson-1/nihongtao/Birthday processing.c[m	
+[1m+++ /dev/null[m
+[36m@@ -1,60 +0,0 @@[m
+[31m-#include<stdio.h>[m
+[31m-[m
+[31m-#define N 13;[m
+[31m-[m
+[31m-void countDays(int y1,int y2,int m1,int m2,int d1,int d2);[m
+[31m-void calculateDayOfWeek(int y2,int m2,int d2);[m
+[31m-void main()[m
+[31m-{[m
+[31m-	int i , j ,y1, y2, m1, m2, d1, d2;[m
+[31m-	printf("Please input your Birhday:\n");[m
+[31m-	scanf("%d-%d-%d",&y1,&m1,&d1);[m
+[31m-	printf("Please input the present date:\n");[m
+[31m-	scanf("%d-%d-%d",&y2,&m2,&d2);[m
+[31m-	countDays(y1,y2,m1,m2,d1,d2);[m
+[31m-	printf("\n");[m
+[31m-	calculateDayOfWeek(y2,m2,d2);[m
+[31m-	getchar();[m
+[31m-	getchar();[m
+[31m-	getchar();[m
+[31m-}[m
+[31m-[m
+[31m-void countDays(int y1,int y2,int m1,int m2,int d1,int d2)[m
+[31m-{[m
+[31m-	int i , j , k, p;[m
+[31m-	int a[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};[m
+[31m-	int sum = 0;[m
+[31m-	for ( i = y1; i < y2; i++)[m
+[31m-   {[m
+[31m-			sum += 365;[m
+[31m-			if ((i % 4 == 4 && i / 100 != 0 )||( i % 400 ==0 ))[m
+[31m-				sum++;[m
+[31m-	}[m
+[31m-	for( j = 0;j <= m2; j++)[m
+[31m-		sum  += a[j];[m
+[31m-	sum += d2;[m
+[31m-	printf("The summary of your lifes is %d days",sum);[m
+[31m-}[m
+[31m-[m
+[31m-void calculateDayOfWeek(int y1,int m1,int d1)[m
+[31m-{[m
+[31m-	int i,j,w;[m
+[31m-	int dayUntilNow =0 ;[m
+[31m-	for (i = 1 ; i <= y1 ; i++)[m
+[31m-		{[m
+[31m-			dayUntilNow += 365;[m
+[31m-			if ((i % 4 == 4 && i / 100 != 0 )||( i % 400 ==0 ))[m
+[31m-				dayUntilNow++;[m
+[31m-	    }[m
+[31m-	w = dayUntilNow % 7;[m
+[31m-	switch(w)[m
+[31m-	{[m
+[31m-		case 0: printf("Firday\n");break;[m
+[31m-		case 1: printf("Saturday\n");break;[m
+[31m-	    case 2: printf("Sunday\n");break;[m
+[31m-		case 3: printf("Monday\n");break;[m
+[31m-		case 4: printf("Tuesday\n");break;[m
+[31m-		case 5: printf("Wednesday\n");break;[m
+[31m-		case 6: printf("Thursday\n");break;[m
+[31m-	}[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/lesson-1/nihongtao/README.md b/lesson-1/nihongtao/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex ac99e2f..0000000[m
+[1m--- a/lesson-1/nihongtao/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,11 +0,0 @@[m
+[31m-Birthday Calculating[m
+[31m-==========================================================[m
+[31m-[m
+[31m-Functions[m
+[31m----------------------------------------------------------[m
+[31m-[m
+[31m-- function 1:<br>[m
+[31m-calculating your living days[m
+[31m-[m
+[31m-- function 2:<br>[m
+[31m-Processing to find out the day of your birthday.[m
+\ No newline at end of file[m
+[1mdiff --git a/lesson-1/nihongtao/{]BOKHZPF}3Y6FVAD2XYO%E.png b/lesson-1/nihongtao/{]BOKHZPF}3Y6FVAD2XYO%E.png[m
+[1mdeleted file mode 100644[m
+[1mindex 1c92c05..0000000[m
+Binary files a/lesson-1/nihongtao/{]BOKHZPF}3Y6FVAD2XYO%E.png and /dev/null differ
+[1mdiff --git a/lesson-1/shejinxin/README.md b/lesson-1/shejinxin/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex 9cf6ab1..0000000[m
+[1m--- a/lesson-1/shejinxin/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-# Tree[m
+[31m-[m
+[31m-A python2 script just a *mini* tree command,can display files and directory in current path.Just like[m
+[31m-[m
+[31m-[m
+[31m-```[m
+[31m-└── lesson-1[m
+[31m-    └── shejinxin[m
+[31m-        └── tree.py[m
+[31m-        └── README.md[m
+[31m-	└── README.md[m
+[31m-		[m
+[31m-```[m
+[1mdiff --git a/lesson-1/shejinxin/google-github.png b/lesson-1/shejinxin/google-github.png[m
+[1mdeleted file mode 100644[m
+[1mindex c818f0a..0000000[m
+Binary files a/lesson-1/shejinxin/google-github.png and /dev/null differ
+[1mdiff --git a/lesson-1/shejinxin/tree.py b/lesson-1/shejinxin/tree.py[m
+[1mdeleted file mode 100644[m
+[1mindex abc3080..0000000[m
+[1m--- a/lesson-1/shejinxin/tree.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,24 +0,0 @@[m
+[31m-#!/bin/python2[m
+[31m-#encoding:utf-8[m
+[31m-import os[m
+[31m-[m
+[31m-ignore_files = ['.git'][m
+[31m-[m
+[31m-def lstree(path,depth = 0):[m
+[31m-    """ Display tree,ignore depth which is use for recursion[m
+[31m-    """[m
+[31m-    files = os.listdir(path)[m
+[31m-    for item in files:[m
+[31m-        if item in ignore_files:[m
+[31m-            # Ignore file in ignore_files[m
+[31m-            continue[m
+[31m-        _print_item(item,depth)[m
+[31m-        itempath = path + '/'+ item[m
+[31m-        if os.path.isdir(itempath):[m
+[31m-            lstree(itempath,depth+1)[m
+[31m-[m
+[31m-def _print_item(item,depth):[m
+[31m-    print "%s└── %s" % (depth*"    ",item)[m
+[31m-[m
+[31m-if __name__ == '__main__':[m
+[31m-    lstree('.')[m
+[1mdiff --git a/lesson-1/wennx/Calendar.cpp b/lesson-1/wennx/Calendar.cpp[m
+[1mdeleted file mode 100644[m
+[1mindex c9c826a..0000000[m
+[1m--- a/lesson-1/wennx/Calendar.cpp[m
+[1m+++ /dev/null[m
+[36m@@ -1,86 +0,0 @@[m
+[31m-#include<stdio.h>[m
+[31m-[m
+[31m-int getFirst(int year,int month);[m
+[31m-int getLast(int year,int month);[m
+[31m-int dayDistance(int year,int month);[m
+[31m-int isLeap(int year);[m
+[31m-void showCalendar(int a,int b);[m
+[31m-[m
+[31m-void main()[m
+[31m-{[m
+[31m-[m
+[31m-	int year,month;[m
+[31m-	[m
+[31m-	printf("please input year and month");[m
+[31m-	scanf("y=%d m=%d",&year,&month);[m
+[31m-	showCalendar(year,month);[m
+[31m-}[m
+[31m-[m
+[31m-[m
+[31m-void showCalendar(int year,int month)[m
+[31m-{[m
+[31m-	printf("    %d / %d\n",year,month);[m
+[31m-	printf("==============================\n");[m
+[31m-	printf(" Sun Mon Tue Wed Thu Fri Sat\n");[m
+[31m-	printf("==============================\n");[m
+[31m-	int dayNum=1,firstWeek,lastDay;[m
+[31m-	[m
+[31m-	firstWeek=getFirst(year,month);[m
+[31m-	lastDay=getLast(year,month);[m
+[31m-	for(int i=0;i<6;i++)[m
+[31m-	{[m
+[31m-		for(int j=0;j<7;j++)[m
+[31m-		{[m
+[31m-			if(i==0&&j<firstWeek)[m
+[31m-				printf("    ");[m
+[31m-			else[m
+[31m-			{[m
+[31m-				printf("%4d",dayNum);[m
+[31m-				dayNum++;[m
+[31m-			}[m
+[31m-			if(dayNum>lastDay)[m
+[31m-				break;[m
+[31m-		[m
+[31m-		}[m
+[31m-		printf("\n");[m
+[31m-		if(dayNum>lastDay)[m
+[31m-			break;	[m
+[31m-	[m
+[31m-	}[m
+[31m-}[m
+[31m-[m
+[31m-int getFirst(int year,int month)[m
+[31m-{[m
+[31m-	int firstWeek;[m
+[31m-[m
+[31m-	firstWeek=dayDistance(year,month)%7+1;[m
+[31m-	return firstWeek;[m
+[31m-}[m
+[31m-int getLast(int year,int month)[m
+[31m-{[m
+[31m-[m
+[31m-	if(month==2)[m
+[31m-		if(isLeap(year))[m
+[31m-			return 29;[m
+[31m-		else return 28;[m
+[31m-	else if (month==4||month==6||month==9||month==11)[m
+[31m-		return 30;[m
+[31m-	else return 31;[m
+[31m-}[m
+[31m-[m
+[31m-int dayDistance(int year,int month)[m
+[31m-{[m
+[31m-	int disYear,disMonth,disDay;[m
+[31m-	disYear=year-1;[m
+[31m-	disMonth=month-1;[m
+[31m-	disDay=disYear*365+(disYear/4-disYear/100+disYear/400);[m
+[31m-	return disDay;[m
+[31m-}[m
+[31m-int isLeap(int year)[m
+[31m-{[m
+[31m-	if(year%400==0||year%4==0)[m
+[31m-		return 1;[m
+[31m-	else if(year%100==0)[m
+[31m-		return 0;[m
+[31m-}[m
+[31m-[m
+[1mdiff --git a/lesson-1/wennx/README.md b/lesson-1/wennx/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex 449f675..0000000[m
+[1m--- a/lesson-1/wennx/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,19 +0,0 @@[m
+[31m-﻿<<<<<<< HEAD[m
+[31m-﻿welcome to here[m
+[31m-===================[m
+[31m-[m
+[31m-[m
+[31m- <i class="icon-cog"></i> **this is mantou's calendar**[m
+[31m-[m
+[31m-----------[m
+[31m-[m
+[31m-[m
+[31m-噗噗**_(:з」∠)_**  [m
+[31m--------------[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-> **ps:**[m
+[31m-[m
+[31m-> - there are something wrong in the yearcalendar[m
+[31m-=======[m
+[1mdiff --git a/lesson-1/wennx/google.png b/lesson-1/wennx/google.png[m
+[1mdeleted file mode 100644[m
+[1mindex 0ba6d3e..0000000[m
+Binary files a/lesson-1/wennx/google.png and /dev/null differ
+[1mdiff --git a/lesson-1/yuwei/README.md b/lesson-1/yuwei/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex d74d75e..0000000[m
+[1m--- a/lesson-1/yuwei/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,50 +0,0 @@[m
+[31m-lesson-task[m
+[31m-===========[m
+[31m-[m
+[31m-Everything about lesson tasks[m
+[31m-[m
+[31m-[m
+[31m-task1[m
+[31m-===[m
+[31m----[m
+[31m-[m
+[31m-task help[m
+[31m-------[m
+[31m-[m
+[31m-- step1:[m
+[31m-use browser to **fork** it to your reposity in github[m
+[31m-[m
+[31m-- step2:[m
+[31m-git clone https://github.com/user/yourrepository[m
+[31m-[m
+[31m-- step3:[m
+[31m-finish task in your local repository(in pc)[m
+[31m-task including three things(picture,README.md and clean code)[m
+[31m-[m
+[31m-- step4:[m
+[31m-git add .[m
+[31m-[m
+[31m-- step5:[m
+[31m-git commit -m "xxx task"[m
+[31m-[m
+[31m-- step6:[m
+[31m-git push origin master[m
+[31m-[m
+[31m-- step7:[m
+[31m-use browser to **pull request** in https://github.com/user/yourrepository[m
+[31m-[m
+[31m-more detail:[m
+[31m-----[m
+[31m-see in http://bailong139.blog.163.com/blog/static/207238100201422412659845/[m
+[31m-[m
+[31m-[m
+[31m-some inportant things[m
+[31m-----[m
+[31m-- git add[m
+[31m-- git commit -m ""[m
+[31m-- git branch[m
+[31m-- git checkout[m
+[31m-- git remote[m
+[31m-- git push[m
+[31m-[m
+[31m-[m
+[1mdiff --git a/lesson-1/yuwei/google.png b/lesson-1/yuwei/google.png[m
+[1mdeleted file mode 100644[m
+[1mindex f97c059..0000000[m
+Binary files a/lesson-1/yuwei/google.png and /dev/null differ
+[1mdiff --git a/lesson-1/yuwei/initAccountData.php b/lesson-1/yuwei/initAccountData.php[m
+[1mdeleted file mode 100644[m
+[1mindex b3b3f5d..0000000[m
+[1m--- a/lesson-1/yuwei/initAccountData.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,120 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-//注意：（根据需求需要修改的地方）[m
+[31m-//1.数据库信息（function connectDataBase）[m
+[31m-//2.表信息（function getAccountTableSql）[m
+[31m-//3.insert的账号信息（function getAccountSql）[m
+[31m-[m
+[31m-	$mysqli=new mysqli();[m
+[31m-[m
+[31m-	//连接数据库 [m
+[31m-	connectDataBase($mysqli);[m
+[31m-[m
+[31m-	//创建关于accont的表[m
+[31m-	createTable($mysqli);[m
+[31m-[m
+[31m-	//通过检测表里面有没有信息，检测是否已经在表里面写入Accounts数据[m
+[31m-	$hasCreateAccounts = hasInfoInTable($mysqli);[m
+[31m-	[m
+[31m-	if($hasCreateAccounts == false){[m
+[31m-		createAccounts($mysqli);[m
+[31m-	}[m
+[31m-[m
+[31m-	$mysqli->close();[m
+[31m-	echo "no bug";[m
+[31m-[m
+[31m-//底下这段代码是copy过来的，注释很脏[m
+[31m-function connectDataBase($mysqli){[m
+[31m-[m
+[31m-	//设置数据库变量 [m
+[31m-	$db_host   = 'localhost';  //数据库主机名称，一般都为localhost [m
+[31m-	$db_user   = 'root';        //数据库用户帐号，根据个人情况而定 [m
+[31m-	$db_psw = '';   //数据库用户密码，根据个人情况而定 [m
+[31m-	$db_name  = 'wordpress';         //数据库具体名称，以刚才创建的数据库为准 [m
+[31m-	$mysqli->connect($db_host,$db_user,$db_psw,$db_name);[m
+[31m-[m
+[31m-	//设置字符集，如utf8和gbk等，根据数据库的字符集而定 [m
+[31m-	$mysqli->query("set names 'utf8'"); [m
+[31m-[m
+[31m-}[m
+[31m-[m
+[31m-function createTable($mysqli){[m
+[31m-	$createAccountTableSql = getAccountTableSql();[m
+[31m-	$mysqli->query($createAccountTableSql);[m
+[31m-}[m
+[31m-[m
+[31m-function getAccountTableSql(){[m
+[31m-	$createAccountTableSql = "CREATE TABLE account_list([m
+[31m-		id int,[m
+[31m-		account varchar(255),[m
+[31m-		password varchar(255),[m
+[31m-[m
+[31m-		info_user varchar(10000),[m
+[31m-[m
+[31m-		info_buy varchar(255),[m
+[31m-		date_buy varchar(10),[m
+[31m-[m
+[31m-		info_repair varchar(255),[m
+[31m-		person_repair varchar(10),[m
+[31m-		date_repair varchar(10)[m
+[31m-[m
+[31m-		)CHARSET = utf8";[m
+[31m-[m
+[31m-	return $createAccountTableSql;[m
+[31m-}[m
+[31m-[m
+[31m-function hasInfoInTable($mysqli){[m
+[31m-	$firstAccountRowId = getFirstAccountRowId($mysqli);[m
+[31m-	if($firstAccountRowId == 100){[m
+[31m-		return true;[m
+[31m-	}[m
+[31m-	else{[m
+[31m-		return false;[m
+[31m-	}[m
+[31m-}[m
+[31m-[m
+[31m-function getFirstAccountRowId($mysqli){[m
+[31m-	$getFirstAccountRowSql = "SELECT * FROM account_list[m
+[31m-		WHERE account = '80000800'";[m
+[31m-    $result = $mysqli->query($getFirstAccountRowSql);[m
+[31m-	$firstAccountRow = $result->fetch_assoc();[m
+[31m-	$id = $firstAccountRow['id'];[m
+[31m-	return $id;[m
+[31m-}[m
+[31m-[m
+[31m-function createAccounts($mysqli){[m
+[31m-	for ($i = 0; $i <= 1000; $i++) { [m
+[31m-		$initAccountsSql = getAccountsSql($i);[m
+[31m-[m
+[31m-		$mysqli->query($initAccountSql);[m
+[31m-	}[m
+[31m-	echo "createAccounts ";[m
+[31m-}[m
+[31m-[m
+[31m-function getAccountsSql($i){[m
+[31m-	$account = createAccount($i);[m
+[31m-	$password = createPassword($i);[m
+[31m-	$accountSql = "INSERT INTO account_list[m
+[31m-	(id, account, password, info_user, info_buy, date_buy, info_repair, person_repair, date_repair)[m
+[31m-	VALUES(".$i.",".$account.",".$password.",'','','','','','')";[m
+[31m-[m
+[31m-	return $accountSql;[m
+[31m-}[m
+[31m-[m
+[31m-function createAccount($i){[m
+[31m-	$account = 80000000;[m
+[31m-	$account += $i*8;[m
+[31m-[m
+[31m-	return $account;[m
+[31m-}[m
+[31m-[m
+[31m-function createPassword($i){[m
+[31m-	$password = 123456789;[m
+[31m-	for ($j = 0; $j <= $i; $j++) { [m
+[31m-		$password += $i*$j;[m
+[31m-	}[m
+[31m-[m
+[31m-	return $password;[m
+[31m-}[m
+[31m-[m
+[31m-?>[m
+\ No newline at end of file[m
+[1mdiff --git a/lesson-2/README.md b/lesson-2/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex 3ad4d3d..0000000[m
+[1m--- a/lesson-2/README.md[m
+[1m+++ /dev/null[m
+[36m@@ -1,25 +0,0 @@[m
+[31m-# �ڶ��ογ���ҵ[m
+[31m-[m
+[31m-����ǰ��ҳ���ȡα������ݣ�һ����̬��`JSONP`�ļ���[m
+[31m-[m
+[31m-## �����ļ�[m
+[31m-[m
+[31m-[https://raw.githubusercontent.com/Jnrainerds/lesson-task/master/lesson-2/data.jsonp](https://raw.githubusercontent.com/Jnrainerds/lesson-task/master/lesson-2/data.jsonp)[m
+[31m-[m
+[31m-## ������Ҫ�õ��ļ���[m
+[31m-[m
+[31m-- `HTML`[m
+[31m-[m
+[31m-- `CSS`[m
+[31m-[m
+[31m-- `JavaScript`[m
+[31m-[m
+[31m-- `JQuery`[m
+[31m-[m
+[31m-- `JSON`[m
+[31m-[m
+[31m-- `JSONP`[m
+[31m-[m
+[31m-## ������Ҫ�õ��Ĺ���[m
+[31m-[m
+[31m-- `FireBug`[m
+[1mdiff --git a/lesson-2/data.jsonp b/lesson-2/data.jsonp[m
+[1mdeleted file mode 100644[m
+[1mindex 6f01d20..0000000[m
+[1m--- a/lesson-2/data.jsonp[m
+[1m+++ /dev/null[m
+[36m@@ -1 +0,0 @@[m
+[31m-backdata({"name": "jnrainerds", "msg":"hello"})[m
+\ No newline at end of file[m
